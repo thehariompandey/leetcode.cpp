@@ -3,67 +3,90 @@ using namespace std;
 
 class Node{
     public:
-    int data ;
-    Node* next;
 
-    //constructor 
+    int data ;
+    Node* next ;
+
+    // constructor
     Node(int data){
-    this-> data = data ;
-    this -> next = NULL;
+    this->data = data ;
+    this->next = NULL;
 }
 };
 
 // insertion
-void insertatHead(Node* &head , int data){
-    // new node creating 
-    Node* temp = new Node(data);
-    temp ->next = head;
-    head = temp;
-}
-
-void insertatTail(Node* &tail, int data){
+void insertatHead(Node* &head, int data){
     // new node create 
     Node* temp = new Node(data);
-    tail->next = temp;
+    temp->next = head;
+    head = temp;
+
+}
+
+void insertatTail(Node* &tail , int data){
+    Node* temp = new Node(data);
+    tail->next = temp ;
     tail = temp;
 }
 
-void insertatPosition(Node* &head, Node* &tail, int data){
-
-}
-
-// printing function 
+// print 
 void print(Node* &head){
     Node* temp = head;
-
     while(temp != NULL){
-        cout << temp->data << " " ;
+        cout << temp->data << " ";
         temp = temp->next;
     }
     cout << endl;
 }
 
+// insert at any position 
+void insertAtPosition(Node* &head, Node* &tail, int position, int data){
+
+    // edge case if you want to add something on 1 positon 
+    if(position == 1){
+        insertatHead(head, data);
+        return;
+    }
+
+
+    // sabse pehle waha phaucho jaha insert karna hai 
+    // that's why we use loop and temp variable 
+    Node* temp = head ;
+    int cnt = 1;
+
+    while(cnt != position-1){
+        temp = temp->next;
+        cnt++ ;
+    }
+
+    // node create karo
+    Node* nodetoinsert = new Node(data);
+    nodetoinsert->next = temp->next;
+    temp->next = nodetoinsert;
+
+
+    // inserting the element in last 
+    if(temp->next == NULL){
+        insertatTail(tail, data);
+        return;
+    }
+
+
+}
 
 int main(){
-    Node* node1 = new Node(10);
-    // cout << node1->data << endl;  // when you only write node1 then it give memory add so you have to use node->data to get value
-    // node1->next = new Node(15);
-    // cout << node1-> next-> data << endl;
+    Node* head = NULL;
+    Node* tail = head;
+    insertatHead(head, 5);
+    tail = head;
+    cout << head->data << endl;
 
-    // head pointed to node1
-    Node* head = node1;
+    insertatHead(head, 2);
     print(head);
 
-    // inserting in place of head
-    insertatHead(head,12);
+    insertAtPosition(head, tail, 2, 3);
     print(head);
 
-    Node* tail = node1;
-    insertatTail(tail,13);
-    print(head); // no should always print from head 
-
-
-    return 0;
-    
-
+    insertAtPosition(head , tail, 4, 30);
+    print(head);
 }
