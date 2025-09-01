@@ -6,7 +6,7 @@ class Node{
     int data ;
     Node* next;
 
-    // destructor 
+    //constructor 
     Node(int data){
     this-> data = data ;
     this -> next = NULL;
