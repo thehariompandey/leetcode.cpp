@@ -36,16 +36,34 @@ Node* convertArr2DLL(vector<int> &arr){
     return head;
 }
 
-void print(Node* &head){
+void print(Node* head){
     while(head != nullptr){
         cout << head->data << " ";
         head = head->next;
     }
+    cout << endl;
+}
+
+Node* deleteHead(Node* &head){
+    if(head == NULL || head->next == NULL){
+        return NULL;
+    }
+
+    Node* prev = head;
+    head = head->next;
+    head->prev = nullptr;
+    prev->next = nullptr;
+
+    delete prev;
+    return head;
 }
 
 int main(){
     vector<int> arr= {2,4,5,6};
     Node* head = convertArr2DLL(arr);
+    print(head);
+
+    head = deleteHead(head);
     print(head);
 
 }
