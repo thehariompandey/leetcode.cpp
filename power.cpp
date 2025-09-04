@@ -1,24 +1,36 @@
 #include<iostream>
 using namespace std;
 
-double power(double b , int e){
-    double pow = 1;
+double myPow(double x , int n){
+    // double ans = 1.0;
 
-    for(int i = 0; i<abs(e) ; i++){
-        pow = pow*b;
+    // for(int i = 0; i< n ; i++){
+    //     ans = ans * x;
+    // }
+    // return ans;
+
+    long long expo = n ;
+    if(expo < 0){
+        x = 1/x;
+        expo = -expo;
     }
 
-    if(e<0){
-        return 1/pow;
+    double ans = 1.0;
+    while(expo > 0){
+        if(expo % 2 == 1){
+            ans = ans * x;
+            x *= x;
+            expo /= 2;
+        }
+        else{
+            x *= x;
+            expo /= 2;
+        }
     }
-    return pow;
+    return ans;
 }
 
 int main(){
-    double b  = 3.0;
-    int e = 3; 
-    double res = power(b, e);
-    cout << res << endl;
-
+    cout << myPow(2,10);
     return 0;
 }
