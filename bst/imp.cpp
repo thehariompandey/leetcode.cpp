@@ -69,6 +69,23 @@ while(size--){
 
 }
 
+Node* minval(Node* root){
+    Node* temp = root;
+
+    while(temp -> left != NULL){
+        temp = temp -> left;
+    }
+    return temp;
+}
+
+Node* maxval(Node* root){
+    Node* temp = root;
+    while(temp -> right != NULL){
+        temp = temp -> right;
+    }
+    return temp;
+}
+
 void takeInput(Node* &root){
     int data ;
     cin >> data ;
@@ -86,6 +103,9 @@ int main(){
     takeInput(root);
     cout << "printing the bst" << endl;
     levelOrderTraversal(root);
+
+    cout << "min value is " << minval(root) -> data << endl;
+    cout << "max value is " << maxval(root) -> data << endl;
 
     return 0;
 }
